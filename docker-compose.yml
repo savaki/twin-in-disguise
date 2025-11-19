@@ -1,0 +1,33 @@
+# Twin in Disguise - Docker Compose
+# Copyright 2025 Matt Ho
+# Licensed under the Apache License, Version 2.0
+
+services:
+  twin-in-disguise:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      # Uncomment to build for specific platform (e.g., Intel/AMD64)
+      # platforms:
+      #   - linux/amd64
+      # Or build for ARM64/Apple Silicon:
+      # platforms:
+      #   - linux/arm64
+    ports:
+      - "8080:8080"
+    environment:
+      # REQUIRED: Set your Gemini API key
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      # Optional: Set port (default: 8080)
+      - PORT=8080
+      # Optional: Enable verbose logging
+      # - VERBOSE=true
+      # Optional: Enable debug logging
+      # - DEBUG=true
+    restart: unless-stopped
+    # Uncomment to see container logs
+    # logging:
+    #   driver: "json-file"
+    #   options:
+    #     max-size: "10m"
+    #     max-file: "3"

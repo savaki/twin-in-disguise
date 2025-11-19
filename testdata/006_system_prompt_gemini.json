@@ -1,0 +1,22 @@
+{
+  "systemInstruction": {
+    "parts": [
+      {
+        "text": "You are a helpful assistant that always responds in a friendly and professional manner."
+      }
+    ]
+  },
+  "contents": [
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "Hello!"
+        }
+      ]
+    }
+  ],
+  "generationConfig": {
+    "maxOutputTokens": 1024
+  }
+}

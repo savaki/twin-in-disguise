@@ -1,0 +1,30 @@
+# Binaries
+twin-in-disguise
+gemini-in-claude-code
+
+# Git
+.git
+.github
+.gitignore
+
+# Documentation
+README.md
+*.md
+
+# Test files
+*_test.go
+testdata
+
+# CI/CD
+.github
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
