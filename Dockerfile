@@ -59,5 +59,14 @@ EXPOSE 8080
 # Set default environment variables
 ENV PORT=8080
 
+# Environment variables that can be set at runtime:
+# - GEMINI_API_KEY: Required - Your Google Gemini API key
+# - PORT: Optional - HTTP server port (default: 8080)
+# - VERBOSE: Optional - Enable verbose logging
+# - DEBUG: Optional - Enable debug logging
+#
+# Example usage:
+# docker run -e GEMINI_API_KEY="your-key" -e PORT=8080 -e DEBUG=true -p 8080:8080 twin-in-disguise
+
 # Run the binary
 ENTRYPOINT ["/app/twin-in-disguise"]

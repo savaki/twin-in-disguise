@@ -16,20 +16,43 @@ This allows you to:
 
 ## Quickstart
 
-```bash
-# Set your Gemini API key
-export GEMINI_API_KEY="your-api-key-here"
+### Why HTTPS is Required
 
-# Run the proxy server
-./twin-in-disguise
+Claude Code and most Claude-compatible tools require HTTPS connections for security. Since the proxy runs locally (on your machine), you need an HTTPS tunnel to expose it securely. You can use any HTTPS tunneling service—ngrok is just one popular option. Other alternatives include Cloudflare Tunnel, localtunnel, or serveo.
 
-# In another terminal, configure your environment
-export ANTHROPIC_BASE_URL=https://your-ngrok-url  # See Installation section
-export ANTHROPIC_AUTH_TOKEN=test
-export ANTHROPIC_MODEL="gemini-3-pro-preview"
-```
+### Quick Setup with Docker
 
-The server will display setup instructions when it starts, including the exact environment variables to configure.
+1. Get the Docker image running:
+   ```bash
+   # Set your Gemini API key
+   export GEMINI_API_KEY="your-api-key-here"
+
+   # Run with docker-compose
+   docker-compose up -d
+   ```
+
+2. Set up HTTPS tunnel (example using ngrok, but any tunnel service works):
+   ```bash
+   # Install ngrok (or use your preferred tunneling service)
+   # Download from https://ngrok.com/download
+
+   # Create HTTPS tunnel to your local proxy
+   ngrok http 8080
+   ```
+
+3. In a new terminal, set environment variables:
+   ```bash
+   # Use the HTTPS URL from your tunnel service
+   export ANTHROPIC_BASE_URL=https://your-tunnel-url  # e.g., https://abc123.ngrok.io
+   export ANTHROPIC_AUTH_TOKEN=test
+   export ANTHROPIC_MODEL="gemini-3-pro-preview"
+   export ANTHROPIC_DEFAULT_OPUS_MODEL="gemini-3-pro-preview"
+   export ANTHROPIC_DEFAULT_SONNET_MODEL="gemini-3-pro-preview"
+   export ANTHROPIC_DEFAULT_HAIKU_MODEL="gemini-2.0-flash"
+   export CLAUDE_CODE_SUBAGENT_MODEL="gemini-3-pro-preview"
+   ```
+
+You're now ready to use Gemini models with Claude Code in that terminal!
 
 ## Installation
 
@@ -122,17 +145,19 @@ Most Claude-compatible tools (including Claude Code) require HTTPS connections. 
    export ANTHROPIC_BASE_URL=https://abc123.ngrok.io
    ```
 
-### Environment Configuration
+### Environment Variables Reference
 
-Add these to your shell configuration (`~/.zshrc` or `~/.bashrc`):
+All environment variables needed for Claude Code:
 
 ```bash
-# Gemini API key (required for the proxy server)
+# Required: Gemini API key (for the proxy server)
 export GEMINI_API_KEY="your-gemini-api-key"
 
-# Claude Code configuration (requires HTTPS URL)
-export ANTHROPIC_BASE_URL=https://your-ngrok-url
+# Required: Claude Code configuration
+export ANTHROPIC_BASE_URL=https://your-tunnel-url  # HTTPS URL from ngrok, Cloudflare Tunnel, etc.
 export ANTHROPIC_AUTH_TOKEN=test  # Any value works, required but not validated
+
+# Model configuration
 export ANTHROPIC_MODEL="gemini-3-pro-preview"
 export ANTHROPIC_DEFAULT_OPUS_MODEL="gemini-3-pro-preview"
 export ANTHROPIC_DEFAULT_SONNET_MODEL="gemini-3-pro-preview"
@@ -140,10 +165,7 @@ export ANTHROPIC_DEFAULT_HAIKU_MODEL="gemini-2.0-flash"
 export CLAUDE_CODE_SUBAGENT_MODEL="gemini-3-pro-preview"
 ```
 
-Then reload your shell:
-```bash
-source ~/.zshrc  # or ~/.bashrc
-```
+Set these in your terminal session before running Claude Code. If you want them permanent, add to your shell configuration (`~/.zshrc` or `~/.bashrc`).
 
 ## Command-Line Flags
 
