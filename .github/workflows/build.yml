@@ -71,6 +71,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
+          platforms: linux/amd64,linux/arm64
           tags: |
             savaki/twin-in-disguise:latest
             savaki/twin-in-disguise:${{ steps.version.outputs.tag }}
