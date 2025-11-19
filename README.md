@@ -1,18 +1,10 @@
 # Twin in Disguise
 
-A proxy server that translates Anthropic Claude API requests to Google Gemini API calls, allowing you to use Gemini models as drop-in replacements for Claude in tools like Claude Code.
+Run Gemini 3 Pro models in Claude Code.
 
-## What Does This Do?
+This proxy translates between Anthropic and Gemini APIs, letting you use Google's Gemini 3 models (including extended thinking capabilities) with Claude Code and other Claude-compatible tools.
 
-Twin in Disguise acts as a translation layer between the Anthropic Claude API format and Google's Gemini API. It intercepts requests that would normally go to Claude, translates them to Gemini's format, sends them to Gemini, and then translates the responses back to Claude's format.
-
-This allows you to:
-- Use Google's Gemini 3 models (including thinking capabilities) with tools designed for Claude
-- Compare Gemini and Claude performance on the same tasks
-- Access Gemini's extended thinking features through Claude-compatible interfaces
-- Experiment with Gemini 3 Pro's capabilities
-
-**Note:** This tool is designed specifically for Gemini 3 models which support extended thinking. While it may work with other Gemini models, the primary use case is leveraging Gemini 3's unique capabilities.
+**Note:** Designed specifically for Gemini 3 models with extended thinking support. May work with other Gemini models, but primary use case is Gemini 3 Pro.
 
 ## Quickstart
 
