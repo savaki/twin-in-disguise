@@ -198,17 +198,6 @@ serverRunning:
 }
 
 func printSetupInstructions(port int, verbose, debug bool) {
-	homeDir, _ := os.UserHomeDir()
-	shellConfig := "~/.bashrc"
-
-	// Detect shell config file
-	shell := os.Getenv("SHELL")
-	if shell != "" {
-		if shell == "/bin/zsh" || shell == "/usr/bin/zsh" {
-			shellConfig = "~/.zshrc"
-		}
-	}
-
 	fmt.Println()
 	fmt.Println("🚀 Anthropic → Gemini Proxy Server")
 	fmt.Printf("   Running on http://localhost:%d\n", port)
@@ -221,8 +210,7 @@ func printSetupInstructions(port int, verbose, debug bool) {
 		log.Println("Debug logging enabled")
 	}
 
-	fmt.Println("Setup Instructions:")
-	fmt.Println("Add these to your shell configuration (" + shellConfig + "):")
+	fmt.Println("Enter these in your shell:")
 	fmt.Println()
 	fmt.Println("  # Note: ANTHROPIC_BASE_URL requires a secure HTTPS connection (e.g. via ngrok)")
 	fmt.Println("  # export ANTHROPIC_BASE_URL=https://your-ngrok-url")
@@ -232,9 +220,6 @@ func printSetupInstructions(port int, verbose, debug bool) {
 	fmt.Println("  export ANTHROPIC_DEFAULT_SONNET_MODEL=\"gemini-3-pro-preview\"")
 	fmt.Println("  export ANTHROPIC_DEFAULT_HAIKU_MODEL=\"gemini-2.0-flash\"")
 	fmt.Println("  export CLAUDE_CODE_SUBAGENT_MODEL=\"gemini-3-pro-preview\"")
-	fmt.Println()
-	fmt.Println("Then restart your terminal or run:")
-	fmt.Printf("  source %s/%s\n", homeDir, shellConfig[2:])
 	fmt.Println()
 	fmt.Println("Press Ctrl+C to stop the server")
 	fmt.Println()

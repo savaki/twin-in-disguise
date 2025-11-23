@@ -16,11 +16,7 @@ Claude Code and most Claude-compatible tools require HTTPS connections for secur
 
 1. Get the Docker image running:
    ```bash
-   # Using the pre-built public image
-   docker run -d -p 8080:8080 -e GEMINI_API_KEY="your-api-key-here" savaki/twin-in-disguise
-
-   # Or using docker-compose (requires cloning the repo)
-   docker-compose up -d
+   docker run --rm -it -p 8080:8080 -e "GEMINI_API_KEY=${GEMINI_API_KEY}" savaki/twin-in-disguise
    ```
 
 2. Set up HTTPS tunnel (example using ngrok, but any tunnel service works):
@@ -28,11 +24,11 @@ Claude Code and most Claude-compatible tools require HTTPS connections for secur
    # Install ngrok (or use your preferred tunneling service)
    # Download from https://ngrok.com/download
 
-   # Create HTTPS tunnel to your local proxy
+   # In another terminal, create HTTPS tunnel to your local proxy
    ngrok http 8080
    ```
 
-3. In a new terminal, set environment variables:
+3. In another terminal, enter these environment variables in your shell:
    ```bash
    # Use the HTTPS URL from your tunnel service
    export ANTHROPIC_BASE_URL=https://your-tunnel-url  # e.g., https://abc123.ngrok.io
@@ -166,7 +162,7 @@ export ANTHROPIC_DEFAULT_HAIKU_MODEL="gemini-2.0-flash"
 export CLAUDE_CODE_SUBAGENT_MODEL="gemini-3-pro-preview"
 ```
 
-Set these in your terminal session before running Claude Code. If you want them permanent, add to your shell configuration (`~/.zshrc` or `~/.bashrc`).
+Set these in your terminal session before running Claude Code.
 
 ## Command-Line Flags
 
